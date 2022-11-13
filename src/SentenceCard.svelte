@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import ButtonUi from "./ButtonUi.svelte";
 
   export let sentence: string;
   export let idx: number;
@@ -21,13 +22,13 @@
       {sentence}
     </div>
     <div class="edit">
-      <button class="edit-button" on:click={toggleEdit}>編集</button>
-      <button class="remove-button" on:click={remove}>削除</button>
+      <ButtonUi clickCallback={toggleEdit}>編集</ButtonUi>
+      <ButtonUi clickCallback={remove}>x</ButtonUi>
     </div>
   {:else}
     <textarea class="editor" bind:value={sentence} />
     <div class="quit">
-      <button class="quit-button" on:click={toggleEdit}>終わる</button>
+      <ButtonUi clickCallback={toggleEdit}>終了</ButtonUi>
     </div>
   {/if}
 </div>

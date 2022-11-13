@@ -6,8 +6,6 @@
   // eslint-disable-next-line no-undef
   let recognition: SpeechRecognition | null;
   $: recognizing = false;
-  $: recordButtonValue = "録音する";
-  $: recordText = "";
   if (browser) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { webkitSpeechRecognition } = window as any;
@@ -15,34 +13,28 @@
       // eslint-disable-next-line no-undef
       const rec: SpeechRecognition = new webkitSpeechRecognition();
       rec.lang = "ja-JP";
-      // rec.continuous = true;
       rec.onresult = recognizeSpeech;
       recognition = rec;
     });
   }
 
-  // const startRecord = () => {
-  //   if (recognition && recogni) {
-
-  //   }
-  // }
-  const record = () => {
-    if (recognition) {
-      if (recognizing) {
-        recognition.stop();
-        recordButtonValue = "録音する";
-      } else {
-        recognition.start();
-        recordButtonValue = "録音をやめる";
-      }
-      recognizing = !recognizing;
-      // console.log(recognition);
+  const startRecord = () => {
+    if (recognition && !recognizing) {
+      console.log("start");
+      recognition.start();
+      recognizing = true;
+    }
+  };
+  const stopRecord = () => {
+    if (recognition && recognizing) {
+      console.log("end");
+      recognition.stop();
+      recognizing = false;
     }
   };
   // eslint-disable-next-line no-undef
   const recognizeSpeech = (e: SpeechRecognitionEvent) => {
     const text = `${e.results[e.results.length - 1][0].transcript}\n`;
-    recordText += text;
     console.log(text);
     sentenceList.push(text);
     sentenceList = sentenceList;
@@ -62,13 +54,19 @@
   <header><h1>Speech Storage</h1></header>
   <div class="contents">
     <div class="recognition">
-      <button class="record-button" on:click={record}>{recordButtonValue}</button>
+      <button class="record-button" on:pointerdown={startRecord} on:pointerup={stopRecord}>
+        録音
+      </button>
     </div>
-    <div class="card-container">
-      {#each sentenceList as sentence, idx (idx)}
-        <SentenceCard {sentence} {idx} on:remove={removeCard} />
-      {/each}
-    </div>
+    {#if sentenceList.length}
+      <div class="card-container">
+        {#each sentenceList as sentence, idx (idx)}
+          <SentenceCard {sentence} {idx} on:remove={removeCard} />
+        {/each}
+      </div>
+    {:else}
+      <div class="no-record-text">録音したテキストはありません。</div>
+    {/if}
   </div>
 </div>
 
@@ -88,10 +86,14 @@
     height: 6rem;
     border-radius: 6rem;
     border: 2px solid #999;
+    margin: 2rem;
   }
   .record-button:hover {
     background-color: #444;
     color: white;
     transition: all 0.2s ease-in-out;
+  }
+  .record-button:active {
+    background-color: salmon;
   }
 </style>
