@@ -1,6 +1,6 @@
 <h2>使い方</h2>
 <em
-  >注意：比較的新しいChrome OS（iOS版は不可）で正常に動作します。Web Speech
+  >注意：比較的新しいGoogle Chromeブラウザ（iOS版は不可）で正常に動作します。Web Speech
   APIを用いているためです。</em
 >
 <ul>
