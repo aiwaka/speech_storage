@@ -1,4 +1,8 @@
-<header><h1>Speech Storage</h1></header>
+<script>
+  import Header from "./Header.svelte";
+</script>
+
+<Header />
 
 <div class="contents">
   <slot />
