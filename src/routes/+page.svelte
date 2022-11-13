@@ -77,6 +77,10 @@
     border-radius: 6rem;
     border: 2px solid #999;
     margin: 2rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   .record-button:hover {
     background-color: #444;
