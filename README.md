@@ -1,38 +1,12 @@
-# create-svelte
+# Speech Storage
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## 概要
 
-## Creating a project
+発言を簡単に文字として記録でき, 簡単な編集ができる.
+Web Speech APIを用いている.
+高度な編集や保存等はできない.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## 注意
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+用いている機能（Web Speech APIの音声認識機能）の関係上, Chromeでしか動作しない（Firefoxも設定次第で使えるらしい）.
+iOSのChromeでも使えないのでiOSでは使えない.
