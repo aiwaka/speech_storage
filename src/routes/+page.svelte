@@ -50,32 +50,22 @@
   };
 </script>
 
-<div class="app">
-  <header><h1>Speech Storage</h1></header>
-  <div class="contents">
-    <div class="recognition">
-      <button class="record-button" on:pointerdown={startRecord} on:pointerup={stopRecord}>
-        録音
-      </button>
-    </div>
-    {#if sentenceList.length}
-      <div class="card-container">
-        {#each sentenceList as sentence, idx (idx)}
-          <SentenceCard {sentence} {idx} on:remove={removeCard} />
-        {/each}
-      </div>
-    {:else}
-      <div class="no-record-text">録音したテキストはありません。</div>
-    {/if}
-  </div>
+<div class="recognition">
+  <button class="record-button" on:pointerdown={startRecord} on:pointerup={stopRecord}>
+    録音
+  </button>
 </div>
+{#if sentenceList.length}
+  <div class="card-container">
+    {#each sentenceList as sentence, idx (idx)}
+      <SentenceCard {sentence} {idx} on:remove={removeCard} />
+    {/each}
+  </div>
+{:else}
+  <div class="no-record-text">録音したテキストはありません。</div>
+{/if}
 
 <style>
-  .contents {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   .card-container {
     width: 90%;
     margin: auto;
